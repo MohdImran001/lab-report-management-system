@@ -1,11 +1,12 @@
 import { PDFDocument } from "pdf-lib";
-
 import { fetchCachedData } from "@Helpers/cache.helper";
 import {
   TEST_REPORT_URL,
   FINAL_REPORT_URL,
   STAMP_URL,
   EXCLUDED_FIELDS,
+  QRCODE_BASE_URL,
+  DOMAIN,
 } from "../constants";
 
 const downloadjs = require("downloadjs");
@@ -60,12 +61,26 @@ async function GeneratePDF(formData, flag) {
     photoField.setImage(photo);
   }
 
+  // For Final Report
   if (flag) {
+    // Add QR Code image
+    if (formData.token) {
+      const reportUrl = `${DOMAIN}/download/${formData.labSrNo}/${formData.token}`;
+      const qrCodeUrl = `${QRCODE_BASE_URL}/?data=${reportUrl}&size=100x100`;
+      console.log(reportUrl, qrCodeUrl);
+
+      const qrCodeBytesRes = await fetch(qrCodeUrl);
+      const qrCodeBytes = await qrCodeBytesRes.arrayBuffer();
+
+      const qrCode = await pdfDoc.embedPng(qrCodeBytes);
+      const qrCodeField = form.getButton("qrcode");
+      qrCodeField.setImage(qrCode);
+    }
+
     // Set FIT/UNFIT value
     const value = formData.fit;
     const field = form.getTextField("fit-remarks");
     field.setText(value);
-
     if (value === "FIT") {
       form.getTextField("fit").setText(value);
       form.getTextField("unfit").setText("");
@@ -73,6 +88,7 @@ async function GeneratePDF(formData, flag) {
       form.getTextField("fit").setText("");
       form.getTextField("unfit").setText(value);
     }
+
     // Embed the stamp
     const stamp = await pdfDoc.embedPng(stampBytes);
     const stampField = form.getButton("stamp");

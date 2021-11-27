@@ -1,6 +1,7 @@
 export const BASE_URL =
   "https://mohdimran001.github.io/lab-report-management-system/public/assets";
-
+export const QRCODE_BASE_URL = "https://api.qrserver.com/v1/create-qr-code";
+export const DOMAIN = process.env.REACT_APP_DOMAIN;
 export const TEST_REPORT_URL = `${BASE_URL}/reports/test-report.pdf`;
 export const FINAL_REPORT_URL = `${BASE_URL}/reports/final-report.pdf`;
 export const STAMP_URL = `${BASE_URL}/images/stamp.png`;
