@@ -3,9 +3,15 @@
 This project is developed for a client who runs a pathology lab in Delhi, India. Although there are softwares available in the market for this purpose but they are bulky, difficult to use, hard on the eyes and they don't offer customizations. The client wanted a software which fulfill his requirements, easy to use, and can be accessed from anywhere without the hassle of any installation process.
 
 This pathology lab conducts full body examination of candidates who are migrating to other countries.
-This project is being used by the lab, they create and manage 30-40 reports per day. In the past three months, this project helped them in generating more than 1200 reports.
+This project is being used by the lab, they create and manage 30-40 reports per day. In the past six months, this project helped them in generating more than 3000 reports.
 
 ## Overview
+
+### [27th Nov 2021] New Updates
+1. **QR Code Support** - Reports will now have a QR Code. This QR Code allows users to easily download the reports in thier smart phones. Thus, also verifying the integrity of the reports.
+2. **Multi-user support** - Thanks to Firebase ACID Transactions, now multiple staff members of the lab can generate reports at the same time without any data conflict.
+3. **Adhaar Card field** 
+4. **Age field is auto calculated using Date of Birth** -
 
 ### Features
 
