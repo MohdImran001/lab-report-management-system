@@ -7,10 +7,16 @@ This project is being used by the lab, they create and manage 30-40 reports per 
 
 ## Overview
 
+## [15th Dec 2021] New Updates
+
+1. On some smartphones the QR code url for downloading reports was showing an error occured message. It was a cache related issue. Now whenever the report templates are updated, the app will ask user to reload the page to keep the Cache storage in sync.
+2. Minor Design changes in report templates.
+
 ### [27th Nov 2021] New Updates
+
 1. **QR Code Support** - Reports will now have a QR Code. This QR Code allows users to easily download the reports in thier smart phones. Thus, also verifying the integrity of the reports.
 2. **Multi-user support** - Thanks to Firebase ACID Transactions, now multiple staff members of the lab can generate reports at the same time without any data conflict.
-3. **Adhaar Card field** 
+3. **Adhaar Card field**
 4. **Age field is auto calculated using Date of Birth** -
 
 ### Features

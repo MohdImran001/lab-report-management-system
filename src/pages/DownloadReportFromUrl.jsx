@@ -52,6 +52,11 @@ const DownloadReportFromUrl = () => {
       <div className="w-100" style={{ maxWidth: "400px" }}>
         {msg.length > 0 && <Alert variant="primary">{msg}</Alert>}
       </div>
+      <div className="w-100" style={{ maxWidth: "400px" }}>
+        <a href="https://mohdimran.vercel.app">
+          This project is developed by Mohammad Imran.
+        </a>
+      </div>
     </Container>
   );
 };
