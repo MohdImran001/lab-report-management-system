@@ -24,6 +24,7 @@ export const EXCLUDED_FIELDS = [
   "govtIdValue",
   "govtId",
   "token",
+  "urineBilharziasis",
 ];
 
 export const SEARCH_OPTIONS = {
@@ -78,6 +79,7 @@ export const REPORT_FIELDS = {
   heart: "",
   lungs: "NAD",
   abdomen: "NAD",
+  hydrocil: "",
 
   // -> venereal diseases (clinical)
   VDRLorTPHA: "Non-Reactive",
@@ -93,7 +95,7 @@ export const REPORT_FIELDS = {
   // -> urine
   sugar: "NIL",
   albumin: "NIL",
-  urineBilharziasis: "NIL",
+  // urineBilharziasis: "NIL",
   urineOthers: "",
 
   // -> blood

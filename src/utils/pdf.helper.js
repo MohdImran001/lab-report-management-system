@@ -36,11 +36,11 @@ async function fillPDF(formData, flag, formUrl, photoUrl) {
   const govtIdField = form.getTextField("govtIdValue");
   if (formData.passport.length > 0) {
     const passportNo = formData.passport;
-    govtId.setText("Passport No.");
+    govtId.setText("PASSPORT NO.");
     govtIdField.setText(passportNo);
   } else if (formData.aadhaar.length > 0) {
     const aadhaarNo = formData.aadhaar;
-    govtId.setText("Aadhaar No.");
+    govtId.setText("AADHAAR NO.");
     govtIdField.setText(aadhaarNo);
   }
 

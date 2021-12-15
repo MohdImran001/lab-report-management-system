@@ -41,6 +41,7 @@ export default function MedicalExaminationFields() {
           <TextField name="heart" label="Heart" />
           <TextField name="lungs" label="Lungs" />
           <TextField name="abdomen" label="Abdomen" />
+          <TextField name="hydrocil" label="Hydrocil" />
         </COL>
       </Row>
       <br />

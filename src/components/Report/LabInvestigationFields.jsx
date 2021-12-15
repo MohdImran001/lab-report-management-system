@@ -13,7 +13,7 @@ export default function LabInvestigationFields() {
         <COL title="URINE">
           <TextField name="sugar" label="Sugar" />
           <TextField name="albumin" label="Albumin" />
-          <TextField name="urineBilharziasis" label="Bilharziasis" />
+          {/* <TextField name="urineBilharziasis" label="Bilharziasis" /> */}
           <TextField name="urineOthers" label="Others" />
         </COL>
         <COL title="BLOOD">
