@@ -25,7 +25,6 @@ import { formatSavingData } from "@Helpers/data.helper";
 import { REPORT_FIELDS } from "../constants";
 
 function CreateReport() {
-  // States related to Modal
   const [data, setData] = useState({
     report: { ...REPORT_FIELDS },
     edit: false,
@@ -64,10 +63,8 @@ function CreateReport() {
       setError("");
       history.push("/dashboard/reports");
     } catch (err) {
-      toast.error("An error occurred while saving report, please try again", {
-        id,
-      });
       console.log(err, err.message);
+      toast.error(err.message, { id });
       setError(`${err}: ${err.message}`);
     }
 
@@ -105,7 +102,7 @@ function CreateReport() {
         });
       }
 
-      toast.success("Report is ready!", { id: toastId });
+      toast.success("You're good to go", { id: toastId });
       setLoading(false);
     }
     fetchData();

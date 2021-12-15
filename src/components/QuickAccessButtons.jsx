@@ -7,7 +7,7 @@ export default function QuickAccessButtons() {
       <h1>
         <img
           alt=""
-          src="/assets/images/meditrust.png"
+          src="/assets/images/meditrust.jpeg"
           className="d-inline-block align-top"
           style={{ marginRight: "1rem", width: "25rem" }}
         />

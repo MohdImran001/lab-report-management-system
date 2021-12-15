@@ -19,7 +19,7 @@ const DownloadReportFromUrl = () => {
       toast.success("Report Generated Successfully", { id: toastId });
     } catch (err) {
       console.log(err);
-      toast.error("An error occured, please try again", { id: toastId });
+      toast.error(err.message, { id: toastId });
     }
 
     setMsg("Report has been downloaded!");
@@ -37,7 +37,7 @@ const DownloadReportFromUrl = () => {
         }
       } catch (err) {
         console.log(err);
-        setMsg("An error occured!, please try again");
+        setMsg("An error occured!, please try again later");
       }
     }
 

@@ -45,3 +45,16 @@ export const cacheDataOnLoad = async () => {
     console.log("Caching Error => ", err);
   }
 };
+
+// reset cache
+export const resetCache = async () => {
+  console.log("resetting cache storage...");
+  try {
+    const cacheStorage = await caches.open(CACHE_NAME);
+    await cacheStorage.delete(FINAL_REPORT_URL);
+    await cacheStorage.delete(TEST_REPORT_URL);
+    await cacheStorage.addAll([TEST_REPORT_URL, FINAL_REPORT_URL]);
+  } catch (err) {
+    console.log("failed to update cache, please reload the app! => ", err);
+  }
+};

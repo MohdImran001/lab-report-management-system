@@ -39,7 +39,7 @@ function TableView(props) {
       toast.success("Report Generated Successfully", { id: toastId });
     } catch (err) {
       console.log(err);
-      toast.error("An error occured, please try again", { id: toastId });
+      toast.error(err.message, { id: toastId });
     }
 
     setLoading(false);
