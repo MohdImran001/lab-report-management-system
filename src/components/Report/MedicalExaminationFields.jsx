@@ -19,14 +19,14 @@ export default function MedicalExaminationFields() {
             <option value="6/9">6/9</option>
             <option value="6/18">6/18</option>
           </SelectField>
-          <TextField name="otherRightEye" label="Other Right Eye" />
+          {/* <TextField name="otherRightEye" label="Other Right Eye" /> */}
           <SelectField name="visionLeftEye" label="Vision Left Eye">
             <option value="">-- Select --</option>
             <option value="6/6">6/6</option>
             <option value="6/9">6/9</option>
             <option value="6/18">6/18</option>
           </SelectField>
-          <TextField name="otherLeftEye" label="Other Left Eye" />
+          {/* <TextField name="otherLeftEye" label="Other Left Eye" /> */}
         </COL>
         <COL title="EARS">
           <TextField name="rightEar" label="Right Ear" />
@@ -38,10 +38,14 @@ export default function MedicalExaminationFields() {
             label="Blood Pressure"
             unit="mm Hg"
           />
-          <TextField name="heart" label="Heart" />
+          <TextField name="heart" label="Heart-Rate" />
           <TextField name="lungs" label="Lungs" />
           <TextField name="abdomen" label="Abdomen" />
-          <TextField name="hydrocil" label="Hydrocil" />
+          <SelectField name="hydrocil" label="Hydrocil">
+            <option value="Not Seen">Not Seen</option>
+            <option value="Seen">Seen</option>
+            <option value="">-- Select --</option>
+          </SelectField>
         </COL>
       </Row>
       <br />

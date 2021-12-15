@@ -25,6 +25,8 @@ export const EXCLUDED_FIELDS = [
   "govtId",
   "token",
   "urineBilharziasis",
+  "otherRightEye",
+  "otherLeftEye",
 ];
 
 export const SEARCH_OPTIONS = {
@@ -66,9 +68,9 @@ export const REPORT_FIELDS = {
   // MEDICAL EXAMINATION
   // -> eyes
   visionRightEye: "",
-  otherRightEye: "NAD",
+  // otherRightEye: "NAD",
   visionLeftEye: "",
-  otherLeftEye: "NAD",
+  // otherLeftEye: "NAD",
 
   // -> ears
   rightEar: "NAD",

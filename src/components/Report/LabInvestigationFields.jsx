@@ -18,7 +18,7 @@ export default function LabInvestigationFields() {
         </COL>
         <COL title="BLOOD">
           <TextFieldWithUnit name="hemoglobin" label="Hemoglobin" unit="gm %" />
-          <TextField name="malariaFilm" label="Malaria Film" />
+          <TextField name="malariaFilm" label="Malaria Rapid" />
           <SelectField name="microFilaria" label="Micro Filaria">
             <option value="">-- Select --</option>
             <option value="Reactive">Reactive</option>
@@ -64,7 +64,7 @@ export default function LabInvestigationFields() {
           </SelectField>
           <TextField name="lft" label="L.F.T" />
         </COL>
-        <COL title="SEROLOGY">
+        <COL title="SEROLOGY ELISA">
           <TextFieldWithUnit name="urea" label="Urea" unit="mg/dl" />
           <TextFieldWithUnit
             name="creatinine"
