@@ -7,7 +7,7 @@ export const FINAL_REPORT_URL = `${BASE_URL}/reports/final-report.pdf`;
 export const STAMP_URL = `${BASE_URL}/images/stamp.png`;
 export const CACHE_NAME = "meditrust_app";
 
-export const ALLOWED_EXTNS = /(\.jpg|\.jpeg|\.png)$/i;
+export const ALLOWED_EXTNS = /(\.jpg|\.jpeg)$/i;
 
 export const EXCLUDED_FIELDS = [
   "photoName",
@@ -27,6 +27,7 @@ export const EXCLUDED_FIELDS = [
   "urineBilharziasis",
   "otherRightEye",
   "otherLeftEye",
+  "covid",
 ];
 
 export const SEARCH_OPTIONS = {
@@ -81,7 +82,7 @@ export const REPORT_FIELDS = {
   heart: "",
   lungs: "NAD",
   abdomen: "NAD",
-  hydrocil: "",
+  hydrocil: "Not Seen",
 
   // -> venereal diseases (clinical)
   VDRLorTPHA: "Non-Reactive",

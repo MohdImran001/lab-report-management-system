@@ -53,6 +53,7 @@ const FileUpload = () => {
         {error.length > 0 && <Alert variant="danger">{error}</Alert>}
         {msg.length > 0 && <Alert variant="success">{msg}</Alert>}
       </div>
+      <p>Upload .jpg or .jpeg files</p>
     </>
   );
 };
