@@ -1,23 +1,31 @@
-# Reports Management App for Pathology Lab
+# Reports Information System for Pathology Labs
+A web app for pathology labs that helps them in organizing reports efficiently.
 
-This project is developed for a client who runs a pathology lab in Delhi, India. Although there are softwares available in the market for this purpose but they are bulky, difficult to use, hard on the eyes and they don't offer customizations. The client wanted a software which fulfill his requirements, easy to use, and can be accessed from anywhere without the hassle of any installation process.
+Initially this project was developed for a client who runs a pathology lab in Delhi, India. This pathology lab conducts full body examination of candidates who are migrating to other countries. This project helped the lab in generating more than 4000 reports in the past six months. Recently another lab in Bihar (India), also bought a customized version of this project.
 
-This pathology lab conducts full body examination of candidates who are migrating to other countries.
-This project is being used by the lab, they create and manage 30-40 reports per day. In the past six months, this project helped them in generating more than 3000 reports.
+Although there are softwares available in the market for this purpose but they are bulky, difficult to use, hard on the eyes and they don't offer customizations. The client wanted a software which is customized to his requirements and can be accessed by multiple staff members at the same time without the hassle of any installation process.
 
-## Overview
+This project act as a base setup for creating customized versions for different labs. 
 
-## [15th Dec 2021] New Updates
+#### [15th Dec 2021] New Updates
 
 1. On some smartphones the QR code url for downloading reports was showing an error occured message. It was a cache related issue. Now whenever the report templates are updated, the app will ask user to reload the page to keep the Cache storage in sync.
 2. Minor Design changes in report templates.
 
-### [27th Nov 2021] New Updates
+#### [27th Nov 2021] New Updates
 
 1. **QR Code Support** - Reports will now have a QR Code. This QR Code allows users to easily download the reports in thier smart phones. Thus, also verifying the integrity of the reports.
 2. **Multi-user support** - Thanks to Firebase ACID Transactions, now multiple staff members of the lab can generate reports at the same time without any data conflict.
 3. **Adhaar Card field**
 4. **Age field is auto calculated using Date of Birth** -
+
+### Try it out
+
+You can try this project here - https://lab-report-management-system.vercel.app/. This is a development version of the app and consists the latest features . It already contains some prefilled reports for testing purposes.
+
+Use the following credentials to access the dashboard-
+**Email** - test@test.com
+**Password** - test123
 
 ### Features
 
@@ -36,22 +44,23 @@ This project is being used by the lab, they create and manage 30-40 reports per 
 - _Test Report_ is filled by the doctor during examination process.
 - After the examination process, the results are updated in the app and then _Final Report_ is generated.
 - In case, some tests are pending the lab can easily switch between _Test Report_ and _Final Report_ using a checkbox.
-- The lab can edit reports by finding them using the search bar. The reports page also provides quick actions buttons such as **edit**, **delete** and **download**.
-- **Test** and **Final** reports templates are basically PDF Forms created with the help of Adobe Acrobat DC. An amazing library `pdflib.js` is used to fill these templates in the browser with the desired data.
+- The lab can edit reports by finding them using the search bar. 
 
-### Try it out
 
-You can play with this project here - https://lab-report-management-system.vercel.app/. This is a development version of the app. It already contains some prefilled reports for testing purposes.
+### Implementation
 
-Use the following credentials to access the dashboard-
-**Email** - test@test.com
-**Password** - test123
 
-First time load is a little bit slow because it fetches the report templates and stores them in the Cache Storage. When the reports are cached, the pdf generation time reduces by **40%**.
 
-## Upcoming Features
+### Upcoming features
+   1. Creating different roles for Admins and Staff members. 
+      a. admins will have the following features. 
+           - reset/change password
+           - update logo and reports templates
+           - deleting expired reports
+           - changing reference number
+           - downloading data in csv format.
+      b. staff members can only create, update and download reports. 
 
-1.  **Generating a unique QR Code for every report.** - This feature is suggested by the lab to make it easy to verify the integrety of the report.
 
 ## Getting Started
 
