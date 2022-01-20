@@ -11,6 +11,7 @@ import Signup from "@Pages/Signup";
 import Dashboard from "@Pages/Dashboard";
 import ResetPassword from "@Pages/ResetPassword";
 import DownloadReportFromUrl from "@Pages/DownloadReportFromUrl";
+import PageNotFound404 from "@Pages/PageNotFound404";
 
 import { cacheDataOnLoad } from "@Helpers/cache.helper";
 
@@ -53,6 +54,7 @@ function App() {
                 path="/download/:serialNo/:token"
                 component={DownloadReportFromUrl}
               />
+              <Route component={PageNotFound404} />
             </Switch>
           </AuthProvider>
         </Router>
