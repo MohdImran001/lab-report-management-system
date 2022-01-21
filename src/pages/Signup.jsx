@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
+
+import toast from "react-hot-toast";
 import { Link, useHistory } from "react-router-dom";
 import { Card, Form, Button, Alert, Container } from "react-bootstrap";
-import toast from "react-hot-toast";
 
 import { useAuth } from "@Contexts/AuthContext";
 

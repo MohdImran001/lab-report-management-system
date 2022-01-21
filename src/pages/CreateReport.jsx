@@ -15,14 +15,14 @@ import {
 } from "@Components/Report";
 
 // Firebase Service
-import ReportsApi from "@Services/firebase.service";
+import ReportsApi from "@Services/reports.api";
 
-// Helpers
-import GeneratePDF from "@Helpers/pdf.helper";
-import { formatSavingData } from "@Helpers/data.helper";
+// Utils
+import GeneratePDF from "@Utils/pdf";
+import { formatSavingData } from "@Utils/data";
 
 // Constants
-import { REPORT_FIELDS } from "../constants";
+import { REPORT_FIELDS } from "@Utils/constants";
 
 function CreateReport() {
   const [data, setData] = useState({
@@ -30,9 +30,9 @@ function CreateReport() {
     edit: false,
   });
 
-  const [loading, setLoading] = useState(false);
-  const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const location = useLocation();
   const history = useHistory();
@@ -40,32 +40,37 @@ function CreateReport() {
   async function saveAndGenerateReport(formData) {
     setSaving(true);
     const id = toast.loading("Saving report ...");
-
     const formattedFormData = formatSavingData(formData);
+
     try {
-      let obj;
       if (data.edit) {
+        // if there is no token present for report, assign a new one
         if (!formattedFormData.token) {
           formattedFormData.token = uuidv4();
-          console.log("token doesn't exists");
         }
+
+        // Update report
         await ReportsApi.update(formattedFormData);
       } else {
+        // Assign a unique token to new report
         formattedFormData.token = uuidv4();
-        obj = await ReportsApi.save(formattedFormData);
+
+        // Save report and get correct serial number and reference number
+        const obj = await ReportsApi.save(formattedFormData);
         formattedFormData.labSrNo = obj.labSrNo;
         formattedFormData.refrenceNo = obj.refrenceNo;
       }
 
+      // Generate PDF
       await GeneratePDF(formattedFormData, formData.reportCompleted);
 
-      toast.success("Report saved successfully", { id });
       setError("");
+      toast.success("Report saved successfully", { id });
       history.push("/dashboard/reports");
     } catch (err) {
       console.log(err, err.message);
-      toast.error(err.message, { id });
       setError(`${err}: ${err.message}`);
+      toast.error(err.message, { id });
     }
 
     setSaving(false);
@@ -81,16 +86,20 @@ function CreateReport() {
 
       const toastId = editReport
         ? toast.loading("loading report ...")
-        : toast.loading("creating new report ...");
+        : toast.loading("preparing form for new report ...");
 
       let reportData = null;
       if (editReport) {
         try {
+          // Find report
           reportData = await ReportsApi.getById(labSrNo);
         } catch (e) {
+          // No report found
           toast.error("No report found with this serial no.", { id: toastId });
           history.push("/dashboard/reports");
         }
+
+        // Set data
         setData({
           report: reportData,
           edit: true,
@@ -105,6 +114,7 @@ function CreateReport() {
       toast.success("You're good to go", { id: toastId });
       setLoading(false);
     }
+
     fetchData();
   }, []);
 

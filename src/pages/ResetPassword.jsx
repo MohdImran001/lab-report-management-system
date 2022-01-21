@@ -55,7 +55,7 @@ function ResetPassword() {
                 disabled={loading}
                 type="submit"
               >
-                send password reset link
+                Send password reset link
               </Button>
             </Form>
           </Card.Body>

@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
+
 import App from "./pages/App";
 import "bootstrap/dist/css/bootstrap.min.css";
 

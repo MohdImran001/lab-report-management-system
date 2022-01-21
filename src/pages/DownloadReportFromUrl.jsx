@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Alert, Container } from "react-bootstrap";
 import toast from "react-hot-toast";
 
-import ReportsApi from "@Services/firebase.service";
+import ReportsApi from "@Services/reports.api";
 import GeneratePDF from "@Helpers/pdf.helper";
 
 const DownloadReportFromUrl = () => {
@@ -12,12 +12,14 @@ const DownloadReportFromUrl = () => {
 
   const downloadReport = async (report) => {
     setMsg("Downloading Report...");
-    const toastId = toast.loading("generating report...");
+    const toastId = toast.loading("downloading report...");
 
     try {
+      // Prepare report
       await GeneratePDF(report, true);
-      toast.success("Report Generated Successfully", { id: toastId });
+      toast.success("Report downloaded Successfully", { id: toastId });
     } catch (err) {
+      // An error occured
       console.log(err);
       toast.error(err.message, { id: toastId });
     }
@@ -27,15 +29,17 @@ const DownloadReportFromUrl = () => {
 
   useEffect(() => {
     async function verifyReport() {
-      let report = null;
       try {
-        report = await ReportsApi.getById(serialNo);
+        const report = await ReportsApi.getById(serialNo);
+
+        // Verify report using the unique token
         if (report && report.token === token) {
           await downloadReport(report);
         } else {
           setMsg("Couldn't find report, please contact the lab");
         }
       } catch (err) {
+        // Something went wrong
         console.log(err);
         setMsg("An error occured!, please try again later");
       }

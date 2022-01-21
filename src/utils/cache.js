@@ -3,7 +3,7 @@ import {
   TEST_REPORT_URL,
   FINAL_REPORT_URL,
   STAMP_URL,
-} from "../constants";
+} from "./constants";
 
 const fetchAndCacheData = async (url) => {
   let cache;

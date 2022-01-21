@@ -1,11 +1,11 @@
-import { formatFetchedData } from "@Helpers/data.helper";
+import { formatFetchedData } from "@Utils/data";
+import { ALLOWED_EXTNS } from "@Utils/constants";
 import { storage, db, getTime } from "../firebase.config";
-import { ALLOWED_EXTNS } from "../constants";
 
 const reportsRef = db.collection("reports");
 const statsRef = db.collection("reports").doc("--stats--");
 
-async function get() {
+function get() {
   return reportsRef.orderBy("createdAt", "desc").limit(30).get();
 }
 
@@ -43,13 +43,13 @@ function save(formData) {
   });
 }
 
-async function update(formData) {
+function update(formData) {
   const newFormData = { ...formData };
   newFormData.updatedAt = getTime.serverTimestamp();
   return reportsRef.doc(formData.labSrNo).update(newFormData);
 }
 
-async function searchByName(query) {
+function searchByName(query) {
   return reportsRef
     .where("fullName", ">=", query)
     .where("fullName", "<", `${query}z`)
@@ -57,7 +57,7 @@ async function searchByName(query) {
     .get();
 }
 
-async function searchByPassportNo(query) {
+function searchByPassportNo(query) {
   return reportsRef
     .where("passport", ">=", query)
     .where("passport", "<", `${query}z`)
@@ -65,14 +65,14 @@ async function searchByPassportNo(query) {
     .get();
 }
 
-async function searchByExaminedDate(query) {
+function searchByExaminedDate(query) {
   return reportsRef
     .where("dateExamined", ">=", query)
     .where("dateExamined", "<", `${query}z`)
     .get();
 }
 
-async function searchByLabSrNo(query) {
+function searchByLabSrNo(query) {
   const newQuery = `MT_${query}`;
   return reportsRef
     .where("labSrNo", ">=", newQuery)
@@ -82,20 +82,19 @@ async function searchByLabSrNo(query) {
 }
 
 async function getById(id) {
-  let report;
-
+  let report = null;
   const doc = await reportsRef.doc(id).get();
+
   if (doc.exists) {
     const data = doc.data();
     report = formatFetchedData(data);
-  } else {
-    report = null;
+    return report;
   }
 
   return report;
 }
 
-async function upload(photo) {
+function upload(photo) {
   return new Promise((resolve, reject) => {
     if (!photo) {
       reject(new Error("Please select a photo !"));

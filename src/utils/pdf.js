@@ -1,5 +1,5 @@
 import { PDFDocument } from "pdf-lib";
-import { fetchCachedData, resetCache } from "@Utils/cache";
+import { fetchCachedData, resetCache } from "./cache";
 import {
   TEST_REPORT_URL,
   FINAL_REPORT_URL,
@@ -7,7 +7,7 @@ import {
   EXCLUDED_FIELDS,
   QRCODE_BASE_URL,
   DOMAIN,
-} from "../constants";
+} from "./constants";
 
 const downloadjs = require("downloadjs");
 
@@ -93,8 +93,8 @@ async function GeneratePDF(formData, flag) {
   try {
     pdfBytes = await fillPDF(formData, flag, formUrl, photoUrl);
   } catch (err) {
-    await resetCache();
     console.log(err, err.message);
+    await resetCache();
     const e = new Error("Please reload the page");
     throw e;
   }
