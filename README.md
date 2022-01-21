@@ -46,23 +46,17 @@ Use the following credentials to access the dashboard-
 - In case, some tests are pending the lab can easily switch between _Test Report_ and _Final Report_ using a checkbox.
 - The lab can edit reports by finding them using the search bar. 
 
-
-### Implementation
-
-
-
-### Upcoming features
-##### Creating different roles for Admins and Staff members. 
-1. Admins will have the following features. <br />
-    a. reset/change password<br />
-    b. update logo and reports templates <br />
-    c. deleting expired reports <br />
-    d. changing reference number <br />
-    e. downloading data in csv format. <br />
-2. Staff members can only create, update and download reports
-
-##### Writing IN
-
+### Goals
+- Creating different roles for Admins and Staff members. 
+    1. Admins will have the following features. <br />
+        a. reset/change password<br />
+        b. update logo and reports templates <br />
+        c. deleting expired reports <br />
+        d. changing reference number <br />
+        e. downloading data in csv format. <br />
+    2. Staff members can only create, update and download reports
+- Writing end-to-end tests for the app
+- Integrating Sentry in the app to detect crashes
 
 ## Getting Started
 
