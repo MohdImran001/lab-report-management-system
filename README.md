@@ -52,14 +52,16 @@ Use the following credentials to access the dashboard-
 
 
 ### Upcoming features
-   1. Creating different roles for Admins and Staff members. 
-      a. admins will have the following features. 
-           - reset/change password
-           - update logo and reports templates
-           - deleting expired reports
-           - changing reference number
-           - downloading data in csv format.
-      b. staff members can only create, update and download reports. 
+##### Creating different roles for Admins and Staff members. 
+1. Admins will have the following features. <br />
+    a. reset/change password<br />
+    b. update logo and reports templates <br />
+    c. deleting expired reports <br />
+    d. changing reference number <br />
+    e. downloading data in csv format. <br />
+2. Staff members can only create, update and download reports
+
+##### Writing IN
 
 
 ## Getting Started
