@@ -1,4 +1,4 @@
-import { convertDate } from "./date.helper";
+import { convertDate } from "./date";
 
 const getNumericData = (value) => {
   return value.split(" ")[0];

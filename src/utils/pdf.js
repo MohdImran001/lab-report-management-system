@@ -1,5 +1,5 @@
 import { PDFDocument } from "pdf-lib";
-import { fetchCachedData, resetCache } from "@Helpers/cache.helper";
+import { fetchCachedData, resetCache } from "@Utils/cache";
 import {
   TEST_REPORT_URL,
   FINAL_REPORT_URL,

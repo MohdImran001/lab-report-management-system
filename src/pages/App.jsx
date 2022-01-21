@@ -13,7 +13,7 @@ import ResetPassword from "@Pages/ResetPassword";
 import DownloadReportFromUrl from "@Pages/DownloadReportFromUrl";
 import PageNotFound404 from "@Pages/PageNotFound404";
 
-import { cacheDataOnLoad } from "@Helpers/cache.helper";
+import { cacheDataOnLoad } from "@Utils/cache";
 
 function App() {
   const [loading, setLoading] = useState(true);
