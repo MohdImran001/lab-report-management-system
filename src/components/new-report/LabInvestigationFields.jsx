@@ -1,9 +1,8 @@
 import { Row } from "react-bootstrap";
 
-import { TextField, TextFieldWithUnit, SelectField } from "@Form";
-
-import COL from "@Components/Layouts/Col";
-import Heading from "@Components/Heading";
+import COL from "@Layouts/Col";
+import { Heading } from "@Components/global";
+import { TextField, TextFieldWithUnit, SelectField } from "@Form/Fields";
 
 export default function LabInvestigationFields() {
   return (

@@ -3,8 +3,8 @@ import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import toast from "react-hot-toast";
 
 import ReportsApi from "@Services/reports.api";
-import { TableView } from "@Components";
 import { SEARCH_OPTIONS } from "@Utils/constants";
+import TableView from "@Components/reports-list/TableView";
 
 export default function Reports() {
   const [data, setData] = useState([]);

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import toast from "react-hot-toast";
+import { Formik, Form } from "formik";
 import { Container, Row, Button } from "react-bootstrap";
 import { useLocation, useHistory } from "react-router-dom";
-import { Formik, Form } from "formik";
-import toast from "react-hot-toast";
 
 // Report Components
 import {
@@ -12,7 +12,7 @@ import {
   MedicalExaminationFields,
   LabInvestigationFields,
   Remarks,
-} from "@Components/Report";
+} from "@Components/new-report";
 
 // Firebase Service
 import ReportsApi from "@Services/reports.api";

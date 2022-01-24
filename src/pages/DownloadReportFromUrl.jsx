@@ -4,7 +4,7 @@ import { Alert, Container } from "react-bootstrap";
 import toast from "react-hot-toast";
 
 import ReportsApi from "@Services/reports.api";
-import GeneratePDF from "@Helpers/pdf.helper";
+import GeneratePDF from "@Utils/pdf";
 
 const DownloadReportFromUrl = () => {
   const [msg, setMsg] = useState("");

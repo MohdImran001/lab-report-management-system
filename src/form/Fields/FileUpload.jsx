@@ -3,7 +3,7 @@ import { useFormikContext } from "formik";
 import { Button, Form, Alert } from "react-bootstrap";
 import toast from "react-hot-toast";
 
-import ReportsApi from "@Services/firebase.service";
+import ReportsApi from "@Services/reports.api";
 
 const FileUpload = () => {
   const [photo, setPhoto] = useState(null);
@@ -19,19 +19,17 @@ const FileUpload = () => {
 
     try {
       const { url, name } = await ReportsApi.upload(photo);
-
       toast.success("File Upload Successfull", { id });
-
       setFieldValue("photoName", name);
       setFieldValue("candidatePhoto", url);
-
       setError("");
       setMsg("Photo uploaded");
     } catch (err) {
-      toast.error("An error occured, while uploading file", { id });
-      setError(err.message);
       setMsg("");
+      setError(err.message);
+      toast.error("An error occured, while uploading file", { id });
     }
+
     setLoading(false);
   }
 

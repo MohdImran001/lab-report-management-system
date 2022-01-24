@@ -1,11 +1,9 @@
 import { Row } from "react-bootstrap";
 
-import { TextField, TextFieldWithUnit, SelectField } from "@Form";
-
-import { Pregnancy } from "@Components/Form/ReactiveFields";
-
-import COL from "@Components/Layouts/Col";
-import Heading from "@Components/Heading";
+import COL from "@Layouts/Col";
+import { Heading } from "@Components/global";
+import { Pregnancy } from "@Form/ReactiveFields";
+import { TextField, TextFieldWithUnit, SelectField } from "@Form/Fields";
 
 export default function MedicalExaminationFields() {
   return (

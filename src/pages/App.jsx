@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { PrivateRoute } from "@Components";
+import { PrivateRoute } from "@Components/global";
 import { AuthProvider } from "@Contexts/AuthContext";
 
 import Login from "@Pages/Login";

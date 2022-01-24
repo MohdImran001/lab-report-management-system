@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 
-import TextField from "@Components/Form/TextField";
+import { TextField } from "@Form/Fields";
 
 const GovtId = () => {
   const [showPassport, setShowPassport] = useState(true);

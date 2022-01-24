@@ -6,16 +6,12 @@ import {
   TextField,
   TextFieldWithUnit,
   SelectField,
-} from "@Form";
+} from "@Form/Fields";
 
-import {
-  ExpiryDateField,
-  DisplayPhoto,
-  Age,
-} from "@Components/Form/ReactiveFields";
+import { ExpiryDateField, DisplayPhoto, Age } from "@Form/ReactiveFields";
 
-import COL from "@Components/Layouts/Col";
-import Heading from "@Components/Heading";
+import COL from "@Layouts/Col";
+import { Heading } from "@Components/global";
 
 export default function CandidateInfoFields() {
   return (

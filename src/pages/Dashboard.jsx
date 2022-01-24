@@ -4,8 +4,8 @@ import Reports from "@Pages/Reports";
 import CreateReport from "@Pages/CreateReport";
 import UpdatePassword from "@Pages/UpdatePassword";
 
-import AppLayout from "@Components/Layouts/AppLayout";
-import { PrivateRoute, QuickAccessButtons } from "@Components/";
+import AppLayout from "@Layouts/AppLayout";
+import { PrivateRoute, QuickAccessButtons } from "@Components/global";
 
 function Dashboard() {
   const { path } = useRouteMatch();
