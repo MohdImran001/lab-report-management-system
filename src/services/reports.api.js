@@ -148,7 +148,7 @@ function resetReference() {
       if (!statsDoc.exists) {
         return console.log("Stats doc is missing !");
       }
-      // Set Reference No to Zero (0)
+      // Set Reference Number to Zero (0)
       return transaction.update(statsRef, {
         reference: 0,
       });
