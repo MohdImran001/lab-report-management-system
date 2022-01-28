@@ -7,9 +7,9 @@ export default function QuickAccessButtons() {
       <h1>
         <img
           alt=""
-          src="/assets/images/meditrust.jpeg"
+          src="/assets/images/report-icon.png"
           className="d-inline-block align-top"
-          style={{ marginRight: "1rem", width: "25rem" }}
+          // style={{ marginRight: "1rem", width: "25rem" }}
         />
       </h1>
       <br />
