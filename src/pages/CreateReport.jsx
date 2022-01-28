@@ -77,45 +77,47 @@ function CreateReport() {
   }
 
   useEffect(() => {
+    let mounted = true;
     async function fetchData() {
       setLoading(true);
+
+      const reportData = {
+        report: { ...REPORT_FIELDS },
+        edit: false,
+      };
 
       const queryParams = new URLSearchParams(location.search);
       const labSrNo = queryParams.get("edit");
       const editReport = !!labSrNo;
-
       const toastId = editReport
         ? toast.loading("loading report ...")
         : toast.loading("preparing form for new report ...");
 
-      let reportData = null;
       if (editReport) {
         try {
           // Find report
-          reportData = await ReportsApi.getById(labSrNo);
+          reportData.report = await ReportsApi.getById(labSrNo);
+          reportData.edit = true;
         } catch (e) {
           // No report found
           toast.error("No report found with this serial no.", { id: toastId });
           history.push("/dashboard/reports");
         }
-
-        // Set data
-        setData({
-          report: reportData,
-          edit: true,
-        });
-      } else {
-        setData({
-          report: { ...REPORT_FIELDS },
-          edit: false,
-        });
       }
 
+      if (mounted) {
+        setData(reportData);
+      }
       toast.success("You're good to go", { id: toastId });
       setLoading(false);
     }
 
     fetchData();
+
+    // This will be called when this component is unmount
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   return (
