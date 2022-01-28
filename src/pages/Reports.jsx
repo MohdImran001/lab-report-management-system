@@ -61,15 +61,16 @@ export default function Reports() {
     if (e) e.preventDefault();
     const toastId = toast.loading("Loading report...");
 
+    let reports;
     try {
-      const reports = await ReportsApi.get();
-      setData(reports.docs);
+      reports = await ReportsApi.get();
       toast.success(`Fetched ${reports.docs.length} reports`, { id: toastId });
     } catch (err) {
       console.log(err);
       toast.error("An error occured!", { id: toastId });
     }
 
+    setData(reports.docs);
     setLoading(false);
   }
 
