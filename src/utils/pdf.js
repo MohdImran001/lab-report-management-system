@@ -47,7 +47,7 @@ async function fillPDF(formData, flag, formUrl, photoUrl) {
   // Set candidate photo; if exists
   if (photoUrl.length > 1) {
     const photo = await pdfDoc.embedJpg(photoBytes);
-    const photoField = form.getButton("photo");
+    const photoField = form.getButton("photo_af_image");
     photoField.setImage(photo);
   }
 
@@ -60,7 +60,7 @@ async function fillPDF(formData, flag, formUrl, photoUrl) {
       const qrCodeBytesRes = await fetch(qrCodeUrl);
       const qrCodeBytes = await qrCodeBytesRes.arrayBuffer();
       const qrCode = await pdfDoc.embedPng(qrCodeBytes);
-      const qrCodeField = form.getButton("qrcode");
+      const qrCodeField = form.getButton("qrcode_af_image");
       qrCodeField.setImage(qrCode);
     }
 
@@ -76,7 +76,7 @@ async function fillPDF(formData, flag, formUrl, photoUrl) {
 
     // Embed the stamp
     const stamp = await pdfDoc.embedPng(stampBytes);
-    const stampField = form.getButton("stamp");
+    const stampField = form.getButton("stamp_af_image");
     stampField.setImage(stamp);
   }
 
