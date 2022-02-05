@@ -17,6 +17,10 @@ export function AuthProvider(props) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  function anonymousSignIn() {
+    return auth.signInAnonymously();
+  }
+
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
   }
@@ -58,6 +62,7 @@ export function AuthProvider(props) {
     resetPassword,
     updateEmail,
     updatePassword,
+    anonymousSignIn,
   };
 
   return (

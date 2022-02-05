@@ -6,9 +6,12 @@ import toast from "react-hot-toast";
 import ReportsApi from "@Services/reports.api";
 import GeneratePDF from "@Utils/pdf";
 
+import { useAuth } from "@Contexts/AuthContext";
+
 const DownloadReportFromUrl = () => {
   const [msg, setMsg] = useState("");
   const { serialNo, token } = useParams();
+  const { anonymousSignIn } = useAuth();
 
   const downloadReport = async (report) => {
     setMsg("Downloading Report...");
@@ -30,8 +33,8 @@ const DownloadReportFromUrl = () => {
   useEffect(() => {
     async function verifyReport() {
       try {
+        await anonymousSignIn();
         const report = await ReportsApi.getById(serialNo);
-
         // Verify report using the unique token
         if (report && report.token === token) {
           await downloadReport(report);
@@ -41,7 +44,9 @@ const DownloadReportFromUrl = () => {
       } catch (err) {
         // Something went wrong
         console.log(err);
-        setMsg("An error occured!, please try again later");
+        setMsg(
+          "An unexpected error occured, please try again in a few moments"
+        );
       }
     }
 
