@@ -127,15 +127,6 @@ function upload(photo) {
   });
 }
 
-// async function getCurrent() {
-//   let res;
-//   const querySnapshot = await currentRef.get();
-//   querySnapshot.forEach((doc) => {
-//     res = { id: doc.id, ...doc.data() };
-//   });
-//   return res;
-// }
-
 async function deleteReportById(photoName, id) {
   const deleteReport = reportsRef.doc(id).delete();
   const deletePhoto = storage.ref().child(`images/${photoName}`).delete();
@@ -166,7 +157,6 @@ const ReportsApi = {
   update,
   save,
   upload,
-  // getCurrent,
   delete: deleteReportById,
   resetReference,
 };

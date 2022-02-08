@@ -56,11 +56,6 @@ export default function CandidateInfoFields() {
         <COL>
           <TextField name="poi" label="Place of Issue" />
           <TextField name="nationality" label="Nationality" />
-          {/* <SelectField name="govtId" label="Passport/Aadhaar">
-            <option value="Passport">Passport</option>
-            <option value="Aadhaar">Aadhaar</option>
-          </SelectField>
-          <GovtId /> */}
           <TextField name="passport" label="Passport No." />
           <TextField name="aadhaar" label="Aadhaar No." />
           <TextField name="post" label="Post applied for." />

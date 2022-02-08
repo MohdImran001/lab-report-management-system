@@ -77,13 +77,6 @@ export default function LabInvestigationFields() {
           />
           <TextField name="kft" label="K.F.T" />
         </COL>
-        {/* <COL title="COVID">
-          <SelectField name="covid" label="Covid">
-            <option value="">-- Select --</option>
-            <option value="Positive"> Positive </option>
-            <option value="Negative"> Negative </option>
-          </SelectField>
-        </COL> */}
       </Row>
     </>
   );

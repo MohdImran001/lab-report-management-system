@@ -33,14 +33,13 @@ const DownloadReportFromUrl = () => {
   useEffect(() => {
     async function verifyReport() {
       try {
+        // signIn user anonymously to access firestore
         await anonymousSignIn();
         const report = await ReportsApi.getById(serialNo);
+
         // Verify report using the unique token
-        if (report && report.token === token) {
-          await downloadReport(report);
-        } else {
-          setMsg("Couldn't find report, please contact the lab");
-        }
+        if (report && report.token === token) await downloadReport(report);
+        else setMsg("Couldn't find report, please contact the lab");
       } catch (err) {
         // Something went wrong
         console.log(err);

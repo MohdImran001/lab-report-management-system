@@ -17,14 +17,12 @@ export default function MedicalExaminationFields() {
             <option value="6/9">6/9</option>
             <option value="6/18">6/18</option>
           </SelectField>
-          {/* <TextField name="otherRightEye" label="Other Right Eye" /> */}
           <SelectField name="visionLeftEye" label="Vision Left Eye">
             <option value="">-- Select --</option>
             <option value="6/6">6/6</option>
             <option value="6/9">6/9</option>
             <option value="6/18">6/18</option>
           </SelectField>
-          {/* <TextField name="otherLeftEye" label="Other Left Eye" /> */}
         </COL>
         <COL title="EARS">
           <TextField name="rightEar" label="Right Ear" />
