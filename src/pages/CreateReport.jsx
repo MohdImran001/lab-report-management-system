@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import toast from "react-hot-toast";
+import { Formik, Form } from "formik";
 import { Container, Row, Button } from "react-bootstrap";
 import { useLocation, useHistory } from "react-router-dom";
-import { Formik, Form } from "formik";
-import toast from "react-hot-toast";
 
 // Report Components
 import {
@@ -12,17 +12,17 @@ import {
   MedicalExaminationFields,
   LabInvestigationFields,
   Remarks,
-} from "@Components/Report";
+} from "@Components/new-report";
 
 // Firebase Service
-import ReportsApi from "@Services/firebase.service";
+import ReportsApi from "@Services/reports.api";
 
-// Helpers
-import GeneratePDF from "@Helpers/pdf.helper";
-import { formatSavingData } from "@Helpers/data.helper";
+// Utils
+import GeneratePDF from "@Utils/pdf";
+import { formatSavingData } from "@Utils/data";
 
 // Constants
-import { REPORT_FIELDS } from "../constants";
+import { REPORT_FIELDS } from "@Utils/constants";
 
 function CreateReport() {
   const [data, setData] = useState({
@@ -30,9 +30,9 @@ function CreateReport() {
     edit: false,
   });
 
-  const [loading, setLoading] = useState(false);
-  const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const location = useLocation();
   const history = useHistory();
@@ -40,72 +40,84 @@ function CreateReport() {
   async function saveAndGenerateReport(formData) {
     setSaving(true);
     const id = toast.loading("Saving report ...");
-
     const formattedFormData = formatSavingData(formData);
+
     try {
-      let obj;
       if (data.edit) {
+        // if there is no token present for report, assign a new one
         if (!formattedFormData.token) {
           formattedFormData.token = uuidv4();
-          console.log("token doesn't exists");
         }
+
+        // Update report
         await ReportsApi.update(formattedFormData);
       } else {
+        // Assign a unique token to new report
         formattedFormData.token = uuidv4();
-        obj = await ReportsApi.save(formattedFormData);
+
+        // Save report and get correct serial number and reference number
+        const obj = await ReportsApi.save(formattedFormData);
         formattedFormData.labSrNo = obj.labSrNo;
         formattedFormData.refrenceNo = obj.refrenceNo;
       }
 
+      // Generate PDF
       await GeneratePDF(formattedFormData, formData.reportCompleted);
 
-      toast.success("Report saved successfully", { id });
       setError("");
+      toast.success("Report saved successfully", { id });
       history.push("/dashboard/reports");
     } catch (err) {
       console.log(err, err.message);
-      toast.error(err.message, { id });
       setError(`${err}: ${err.message}`);
+      toast.error(err.message, { id });
     }
 
     setSaving(false);
   }
 
   useEffect(() => {
+    let mounted = true;
     async function fetchData() {
       setLoading(true);
+
+      const reportData = {
+        report: { ...REPORT_FIELDS },
+        edit: false,
+      };
 
       const queryParams = new URLSearchParams(location.search);
       const labSrNo = queryParams.get("edit");
       const editReport = !!labSrNo;
-
       const toastId = editReport
         ? toast.loading("loading report ...")
-        : toast.loading("creating new report ...");
+        : toast.loading("preparing form for new report ...");
 
-      let reportData = null;
       if (editReport) {
         try {
-          reportData = await ReportsApi.getById(labSrNo);
+          // Find report
+          reportData.report = await ReportsApi.getById(labSrNo);
+          reportData.edit = true;
         } catch (e) {
+          // No report found
           toast.error("No report found with this serial no.", { id: toastId });
           history.push("/dashboard/reports");
         }
-        setData({
-          report: reportData,
-          edit: true,
-        });
-      } else {
-        setData({
-          report: { ...REPORT_FIELDS },
-          edit: false,
-        });
       }
 
+      if (mounted) {
+        setData(reportData);
+      }
       toast.success("You're good to go", { id: toastId });
       setLoading(false);
     }
+
     fetchData();
+
+    // This will be called when this component is unmount
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   return (

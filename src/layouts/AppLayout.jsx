@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import { NavigationBar } from "@Components/";
+import { NavigationBar } from "@Components/global";
 
 function AppLayout(props) {
   const { children } = props;

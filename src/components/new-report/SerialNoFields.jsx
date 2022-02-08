@@ -1,7 +1,7 @@
-import TextField from "@Components/Form/TextField";
-import COL from "@Components/Layouts/Col";
-
 import Row from "react-bootstrap/Row";
+
+import COL from "@Layouts/Col";
+import { TextField } from "@Form/Fields";
 
 export default function SerialNoFields() {
   return (

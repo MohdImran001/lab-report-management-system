@@ -1,9 +1,8 @@
 import { Row } from "react-bootstrap";
 
-import { TextField, TextFieldWithUnit, SelectField } from "@Form";
-
-import COL from "@Components/Layouts/Col";
-import Heading from "@Components/Heading";
+import COL from "@Layouts/Col";
+import { Heading } from "@Components/global";
+import { TextField, TextFieldWithUnit, SelectField } from "@Form/Fields";
 
 export default function LabInvestigationFields() {
   return (
@@ -78,13 +77,6 @@ export default function LabInvestigationFields() {
           />
           <TextField name="kft" label="K.F.T" />
         </COL>
-        {/* <COL title="COVID">
-          <SelectField name="covid" label="Covid">
-            <option value="">-- Select --</option>
-            <option value="Positive"> Positive </option>
-            <option value="Negative"> Negative </option>
-          </SelectField>
-        </COL> */}
       </Row>
     </>
   );

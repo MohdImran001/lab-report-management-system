@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import toast from "react-hot-toast";
 
-import { TableView } from "@Components";
-import ReportsApi from "@Services/firebase.service";
-import { SEARCH_OPTIONS } from "../constants";
+import ReportsApi from "@Services/reports.api";
+import { SEARCH_OPTIONS } from "@Utils/constants";
+import TableView from "@Components/reports-list/TableView";
 
 export default function Reports() {
   const [data, setData] = useState([]);
@@ -24,14 +24,27 @@ export default function Reports() {
       return;
     }
 
-    let result;
-    if (option === "labSrNo") result = await ReportsApi.searchByLabSrNo(query);
-    else if (option === "fullName")
-      result = await ReportsApi.searchByName(query);
-    else if (option === "passport")
-      result = await ReportsApi.searchByPassportNo(query);
-    else if (option === "dateExamined")
-      result = await ReportsApi.searchByExaminedDate(query);
+    let result = [];
+    switch (option) {
+      case "labSrNo":
+        result = await ReportsApi.searchByLabSrNo(query);
+        break;
+
+      case "fullName":
+        result = await ReportsApi.searchByName(query);
+        break;
+
+      case "passport":
+        result = await ReportsApi.searchByPassportNo(query);
+        break;
+
+      case "dateExamined":
+        result = await ReportsApi.searchByExaminedDate(query);
+        break;
+
+      default:
+        result = [];
+    }
 
     if (!result.empty) {
       setData(result.docs);
@@ -48,15 +61,16 @@ export default function Reports() {
     if (e) e.preventDefault();
     const toastId = toast.loading("Loading report...");
 
+    let reports;
     try {
-      const reports = await ReportsApi.get();
-      setData(reports.docs);
+      reports = await ReportsApi.get();
       toast.success(`Fetched ${reports.docs.length} reports`, { id: toastId });
     } catch (err) {
       console.log(err);
       toast.error("An error occured!", { id: toastId });
     }
 
+    setData(reports.docs);
     setLoading(false);
   }
 
@@ -135,12 +149,12 @@ export default function Reports() {
           </Col>
         </Row>
       </Form>
-      <Row
-        style={{
-          justifyContent: "center",
-        }}
-      >
-        {loading && (
+      {loading && (
+        <Row
+          style={{
+            justifyContent: "center",
+          }}
+        >
           <img
             src="/assets/images/search-loader.gif"
             alt="infinity"
@@ -148,8 +162,8 @@ export default function Reports() {
               width: "2rem",
             }}
           />
-        )}
-      </Row>
+        </Row>
+      )}
       {data.length === 0 && (
         <Row>
           <Col className="text-center">

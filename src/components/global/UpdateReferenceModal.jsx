@@ -5,7 +5,7 @@ import { Modal, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 // Firebase Service
-import ReportsApi from "@Services/firebase.service";
+import ReportsApi from "@Services/reports.api";
 
 function UpdateReferenceModal(props) {
   const { show, closeModal } = props;
@@ -21,8 +21,8 @@ function UpdateReferenceModal(props) {
       await ReportsApi.resetReference();
       toast.success("Reference updated successfully", { id });
     } catch (err) {
-      toast.error("An error occurred", { id });
       console.log(err);
+      toast.error("An error occurred", { id });
     }
 
     closeModal();

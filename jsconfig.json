@@ -3,12 +3,12 @@
     "baseUrl": "./",
     "paths": {
       "@Components/*": ["src/components/*"],
-      "@Form/*": ["src/components/Form/*"],
-      "@Layouts/*": ["src/components/Layouts/*"],
+      "@Form/*": ["src/form/*"],
+      "@Layouts/*": ["src/layouts/*"],
       "@Contexts/*": ["src/contexts/*"],
       "@Pages/*": ["src/pages/*"],
       "@Services/*": ["src/services/*"],
-      "@Helpers/*": ["src/utils/*"]
+      "@Utils/*": ["src/utils/*"]
     }
   },
   "exclude": ["node_modules"]

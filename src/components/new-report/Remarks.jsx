@@ -1,10 +1,9 @@
-import { Row, Alert, Col } from "react-bootstrap";
 import { Field } from "formik";
 import PropTypes from "prop-types";
+import { Row, Alert, Col } from "react-bootstrap";
 
-import { TextArea, SelectField } from "@Form";
-
-import COL from "@Components/Layouts/Col";
+import COL from "@Layouts/Col";
+import { TextArea, SelectField } from "@Form/Fields";
 
 function Remarks(props) {
   const { error } = props;

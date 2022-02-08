@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Table, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import toast from "react-hot-toast";
-import PropTypes from "prop-types";
 
-import GeneratePDF from "@Helpers/pdf.helper";
-import ReportsApi from "@Services/firebase.service";
+import PropTypes from "prop-types";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+import { Container, Row, Col, Table, Button } from "react-bootstrap";
+
+import GeneratePDF from "@Utils/pdf";
+import ReportsApi from "@Services/reports.api";
 
 function TableView(props) {
   const { reports, updateData } = props;

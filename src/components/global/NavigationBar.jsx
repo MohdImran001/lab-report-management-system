@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Navbar, Nav, Button, Container } from "react-bootstrap";
-import { useHistory, Link } from "react-router-dom";
-import toast from "react-hot-toast";
 
-import { UpdateReferenceModal } from "@Components";
+import toast from "react-hot-toast";
+import { useHistory, Link } from "react-router-dom";
+import { Navbar, Nav, Button, Container } from "react-bootstrap";
+
 import { useAuth } from "@Contexts/AuthContext";
+import { UpdateReferenceModal } from "@Components/global";
 
 export default function NavigationBar() {
   const { logout } = useAuth();

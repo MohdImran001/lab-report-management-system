@@ -1,5 +1,5 @@
 import { PDFDocument } from "pdf-lib";
-import { fetchCachedData, resetCache } from "@Helpers/cache.helper";
+import { fetchCachedData, resetCache } from "./cache";
 import {
   TEST_REPORT_URL,
   FINAL_REPORT_URL,
@@ -7,7 +7,7 @@ import {
   EXCLUDED_FIELDS,
   QRCODE_BASE_URL,
   DOMAIN,
-} from "../constants";
+} from "./constants";
 
 const downloadjs = require("downloadjs");
 
@@ -47,7 +47,7 @@ async function fillPDF(formData, flag, formUrl, photoUrl) {
   // Set candidate photo; if exists
   if (photoUrl.length > 1) {
     const photo = await pdfDoc.embedJpg(photoBytes);
-    const photoField = form.getButton("photo");
+    const photoField = form.getButton("photo_af_image");
     photoField.setImage(photo);
   }
 
@@ -60,7 +60,7 @@ async function fillPDF(formData, flag, formUrl, photoUrl) {
       const qrCodeBytesRes = await fetch(qrCodeUrl);
       const qrCodeBytes = await qrCodeBytesRes.arrayBuffer();
       const qrCode = await pdfDoc.embedPng(qrCodeBytes);
-      const qrCodeField = form.getButton("qrcode");
+      const qrCodeField = form.getButton("qrcode_af_image");
       qrCodeField.setImage(qrCode);
     }
 
@@ -76,7 +76,7 @@ async function fillPDF(formData, flag, formUrl, photoUrl) {
 
     // Embed the stamp
     const stamp = await pdfDoc.embedPng(stampBytes);
-    const stampField = form.getButton("stamp");
+    const stampField = form.getButton("stamp_af_image");
     stampField.setImage(stamp);
   }
 
@@ -93,8 +93,8 @@ async function GeneratePDF(formData, flag) {
   try {
     pdfBytes = await fillPDF(formData, flag, formUrl, photoUrl);
   } catch (err) {
-    await resetCache();
     console.log(err, err.message);
+    await resetCache();
     const e = new Error("Please reload the page");
     throw e;
   }

@@ -1,13 +1,11 @@
-export const BASE_URL =
-  "https://mohdimran001.github.io/lab-report-management-system/public/assets";
-export const QRCODE_BASE_URL = "https://api.qrserver.com/v1/create-qr-code";
-export const DOMAIN = process.env.REACT_APP_DOMAIN;
-export const TEST_REPORT_URL = `${BASE_URL}/reports/test-report.pdf`;
-export const FINAL_REPORT_URL = `${BASE_URL}/reports/final-report.pdf`;
-export const STAMP_URL = `${BASE_URL}/images/stamp.png`;
-export const CACHE_NAME = "meditrust_app";
+export const TEST_REPORT_URL = `https://firebasestorage.googleapis.com/v0/b/lab-report-management-system.appspot.com/o/assets%2Freports%2Ftest-report.pdf?alt=media&token=37403716-008f-4047-aaf9-f3676bbba014`;
+export const FINAL_REPORT_URL = `https://firebasestorage.googleapis.com/v0/b/lab-report-management-system.appspot.com/o/assets%2Freports%2Ffinal-report.pdf?alt=media&token=e42b246a-4049-499b-819d-ffd622f9f8d1`;
+export const STAMP_URL = `https://firebasestorage.googleapis.com/v0/b/lab-report-management-system.appspot.com/o/assets%2Fstamp.png?alt=media&token=5c482a6e-9684-4fff-aebc-fe924be00c6a`;
 
+export const CACHE_NAME = "reports_app";
 export const ALLOWED_EXTNS = /(\.jpg|\.jpeg)$/i;
+export const DOMAIN = process.env.REACT_APP_DOMAIN;
+export const QRCODE_BASE_URL = "https://api.qrserver.com/v1/create-qr-code";
 
 export const EXCLUDED_FIELDS = [
   "photoName",

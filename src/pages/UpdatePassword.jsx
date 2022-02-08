@@ -1,13 +1,13 @@
 import React, { useState, useRef } from "react";
+
+import toast from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 import { Card, Form, Button, Alert, Container } from "react-bootstrap";
-import toast from "react-hot-toast";
 
 import { useAuth } from "@Contexts/AuthContext";
 
 function UpdatePassword() {
   const [error, setError] = useState("");
-
   const [loading, setLoading] = useState(false);
   const passwordRef = useRef();
 
@@ -31,9 +31,9 @@ function UpdatePassword() {
           history.push("/");
         }, 1000);
       } catch (err) {
-        toast.error("An error occurred", { id });
         console.log(err);
         setError(err.message);
+        toast.error("An error occurred", { id });
       }
 
       setLoading(false);
