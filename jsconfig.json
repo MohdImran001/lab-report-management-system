@@ -8,7 +8,8 @@
       "@Contexts/*": ["src/contexts/*"],
       "@Pages/*": ["src/pages/*"],
       "@Services/*": ["src/services/*"],
-      "@Utils/*": ["src/utils/*"]
+      "@Utils/*": ["src/utils/*"],
+      "@Hooks/*": ["src/hooks/*"]
     }
   },
   "exclude": ["node_modules"]

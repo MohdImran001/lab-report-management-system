@@ -10,6 +10,7 @@ module.exports = {
       "@Pages": path.resolve(__dirname, "src/pages/"),
       "@Utils": path.resolve(__dirname, "src/utils/"),
       "@Contexts": path.resolve(__dirname, "src/contexts/"),
+      "@Hooks": path.resolve(__dirname, "src/hooks/"),
     },
   },
 };
