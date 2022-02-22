@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { PrivateRoute } from "@Components/global";
 import { AuthProvider } from "@Contexts/AuthContext";
@@ -44,7 +44,7 @@ function App() {
         </Container>
       )}
       {!loading && (
-        <Router>
+        <BrowserRouter>
           <AuthProvider>
             <Switch>
               <Route exact path="/" component={Login} />
@@ -58,7 +58,7 @@ function App() {
               <Route component={PageNotFound404} />
             </Switch>
           </AuthProvider>
-        </Router>
+        </BrowserRouter>
       )}
     </div>
   );

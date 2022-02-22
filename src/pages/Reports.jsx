@@ -59,7 +59,7 @@ export default function Reports() {
     setLoading(true);
 
     if (e) e.preventDefault();
-    const toastId = toast.loading("Loading report...");
+    const toastId = toast.loading("Loading reports...");
 
     let reports;
     try {

@@ -13,18 +13,13 @@ function Dashboard() {
   return (
     <AppLayout>
       <Switch>
-        <PrivateRoute exact path={path} component={QuickAccessButtons} />
-        <PrivateRoute exact path={`${path}/reports`} component={Reports} />
+        <PrivateRoute path={`${path}/reports`} component={Reports} />
+        <PrivateRoute path={`${path}/create-report`} component={CreateReport} />
         <PrivateRoute
-          exact
-          path={`${path}/create-report`}
-          component={CreateReport}
-        />
-        <PrivateRoute
-          exact
           path={`${path}/change-password`}
           component={UpdatePassword}
         />
+        <PrivateRoute path={path} component={QuickAccessButtons} />
       </Switch>
     </AppLayout>
   );

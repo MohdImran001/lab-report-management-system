@@ -1,5 +1,4 @@
 import { formatFetchedData } from "@Utils/data";
-import { ALLOWED_EXTNS } from "@Utils/constants";
 import { storage, db, getTime } from "../firebase.config";
 
 const reportsRef = db.collection("reports");
@@ -11,7 +10,7 @@ function get() {
 
 function save(formData) {
   const newFormData = { ...formData };
-  newFormData.createdAt = getTime.serverTimestamp();
+  newFormData.createdAt = getTime.serverTimestamp(); // placeholder for timestamp evaluated at server
 
   return db.runTransaction((transaction) => {
     return transaction.get(statsRef).then((statsDoc) => {
@@ -31,10 +30,10 @@ function save(formData) {
       const newLabSrNo = `MT_${newCount}`;
       const newReferenceNo = `MT_${newReference}`;
 
-      const newReportRef = reportsRef.doc(newLabSrNo);
       newFormData.labSrNo = newLabSrNo;
       newFormData.refrenceNo = newReferenceNo;
 
+      const newReportRef = reportsRef.doc(newLabSrNo);
       transaction.set(newReportRef, newFormData);
 
       const obj = { labSrNo: newLabSrNo, refrenceNo: newReferenceNo };
@@ -51,7 +50,7 @@ function update(formData) {
 
 function searchByName(query) {
   return reportsRef
-    .where("fullName", ">=", query)
+    .where("fullName", ">=", query) //
     .where("fullName", "<", `${query}z`)
     .limit(10)
     .get();
@@ -95,36 +94,18 @@ async function getById(id) {
 }
 
 function upload(photo) {
-  return new Promise((resolve, reject) => {
-    if (!photo) {
-      reject(new Error("Please select a photo !"));
-    }
-    if (!ALLOWED_EXTNS.exec(photo.name)) {
-      reject(new Error("Please upload a .jpg or .jpeg file"));
-    }
+  const date = new Date().toISOString();
+  const name = `${photo.name}_${date}`;
+  const uploadRef = storage.ref(`images/${name}`);
 
-    const date = new Date().toISOString();
-    const name = `${photo.name}_${date}`;
-
-    const uploadTask = storage.ref(`images/${name}`).put(photo);
-    uploadTask.on(
-      "state_changed",
-      () => {},
-      (error) => {
-        console.log(error);
-        reject(error);
-      },
-      () => {
-        storage
-          .ref("images")
-          .child(name)
-          .getDownloadURL()
-          .then((url) => {
-            resolve({ url, name });
-          });
-      }
-    );
-  });
+  return uploadRef
+    .put(photo)
+    .then(() => {
+      return uploadRef.getDownloadURL();
+    })
+    .then((url) => {
+      return { url, name };
+    });
 }
 
 async function deleteReportById(photoName, id) {
