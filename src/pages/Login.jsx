@@ -31,7 +31,7 @@ function Login() {
         toast.success("Login successful", { id });
         history.push("/dashboard");
       } catch (err) {
-        toast.error("Oops an error occurred", { id });
+        toast.error("Oops! an error occurred", { id });
         setError(err.message);
       }
 
