@@ -6,29 +6,10 @@ import { Link } from "react-router-dom";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
 
 import GeneratePDF from "@Utils/pdf";
-import ReportsApi from "@Services/reports.api";
 
 function TableView(props) {
-  const { reports, updateData } = props;
+  const { reports, deleteReport } = props;
   const [loading, setLoading] = useState(false);
-
-  const deleteReport = async (id) => {
-    setLoading(true);
-    const toastId = toast.loading("Deleting report and the accociated data");
-    const { photoName } = reports.find((report) => report.id === id).data();
-
-    try {
-      await ReportsApi.delete(photoName, id);
-      toast.success("Report Deleted Successfully", { id: toastId });
-    } catch (err) {
-      console.log(err);
-      toast.error(`An error occured`, { id: toastId });
-    }
-
-    const newData = reports.filter((report) => report.id !== id);
-    updateData(newData);
-    setLoading(false);
-  };
 
   const downloadReport = async (id, flag) => {
     setLoading(true);
@@ -134,7 +115,7 @@ function TableView(props) {
 
 TableView.propTypes = {
   reports: PropTypes.arrayOf(Object).isRequired,
-  updateData: PropTypes.func.isRequired,
+  deleteReport: PropTypes.func.isRequired,
 };
 
 export default TableView;
