@@ -6,32 +6,13 @@ import { Link } from "react-router-dom";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
 
 import GeneratePDF from "@Utils/pdf";
-import ReportsApi from "@Services/reports.api";
 
 function TableView(props) {
-  const { reports, updateData } = props;
-  const [loading, setLoading] = useState(false);
-
-  const deleteReport = async (id) => {
-    setLoading(true);
-    const toastId = toast.loading("Deleting report and the accociated data");
-    const { photoName } = reports.find((report) => report.id === id).data();
-
-    try {
-      await ReportsApi.delete(photoName, id);
-      toast.success("Report Deleted Successfully", { id: toastId });
-    } catch (err) {
-      console.log(err);
-      toast.error(`An error occured`, { id: toastId });
-    }
-
-    const newData = reports.filter((report) => report.id !== id);
-    updateData(newData);
-    setLoading(false);
-  };
+  const { reports, deleteReport, isDeleting } = props;
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const downloadReport = async (id, flag) => {
-    setLoading(true);
+    setIsDownloading(true);
     const toastId = toast.loading("generating report...");
 
     const reportData = reports.find((report) => report.id === id).data();
@@ -43,7 +24,7 @@ function TableView(props) {
       toast.error(err.message, { id: toastId });
     }
 
-    setLoading(false);
+    setIsDownloading(false);
   };
 
   return (
@@ -98,7 +79,7 @@ function TableView(props) {
                       <Button
                         variant="danger"
                         onClick={() => deleteReport(doc.id)}
-                        disabled={loading}
+                        disabled={isDownloading || isDeleting}
                       >
                         Delete
                       </Button>
@@ -107,7 +88,7 @@ function TableView(props) {
                       <Button
                         variant="success"
                         onClick={() => downloadReport(doc.id, false)}
-                        disabled={loading}
+                        disabled={isDownloading || isDeleting}
                       >
                         Download
                       </Button>
@@ -116,7 +97,7 @@ function TableView(props) {
                       <Button
                         variant="success"
                         onClick={() => downloadReport(doc.id, true)}
-                        disabled={loading}
+                        disabled={isDownloading || isDeleting}
                       >
                         Download
                       </Button>
@@ -134,7 +115,8 @@ function TableView(props) {
 
 TableView.propTypes = {
   reports: PropTypes.arrayOf(Object).isRequired,
-  updateData: PropTypes.func.isRequired,
+  deleteReport: PropTypes.func.isRequired,
+  isDeleting: PropTypes.bool.isRequired,
 };
 
 export default TableView;

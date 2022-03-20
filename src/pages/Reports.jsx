@@ -1,86 +1,30 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
-import toast from "react-hot-toast";
 
-import ReportsApi from "@Services/reports.api";
 import { SEARCH_OPTIONS } from "@Utils/constants";
 import TableView from "@Components/reports-list/TableView";
+import useReport from "@Hooks/useReport";
 
 export default function Reports() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const {
+    data,
+    loading,
+    refreshReports,
+    findReports,
+    deleteReport,
+    isDeleting,
+  } = useReport();
 
   const searchRef = useRef();
   const selectRef = useRef();
 
-  async function findReports() {
-    setLoading(true);
-
-    const query = searchRef.current.value.toUpperCase();
-    const option = selectRef.current.value;
-
-    if (query.length === 0) {
-      setLoading(false);
-      return;
-    }
-
-    let result = [];
-    switch (option) {
-      case "labSrNo":
-        result = await ReportsApi.searchByLabSrNo(query);
-        break;
-
-      case "fullName":
-        result = await ReportsApi.searchByName(query);
-        break;
-
-      case "passport":
-        result = await ReportsApi.searchByPassportNo(query);
-        break;
-
-      case "dateExamined":
-        result = await ReportsApi.searchByExaminedDate(query);
-        break;
-
-      default:
-        result = [];
-    }
-
-    if (!result.empty) {
-      setData(result.docs);
-    } else {
-      setData([]);
-    }
-
-    setLoading(false);
-  }
-
-  async function fetchReports(e) {
-    setLoading(true);
-
-    if (e) e.preventDefault();
-    const toastId = toast.loading("Loading reports...");
-
-    let reports;
-    try {
-      reports = await ReportsApi.get();
-      toast.success(`Fetched ${reports.docs.length} reports`, { id: toastId });
-    } catch (err) {
-      console.log(err);
-      toast.error("An error occured!", { id: toastId });
-    }
-
-    setData(reports.docs);
-    setLoading(false);
-  }
-
   useEffect(() => {
-    fetchReports();
+    refreshReports();
   }, []);
 
   return (
     <Container className="p-4 text-center" fluid>
-      <Form onSubmit={(e) => fetchReports(e)}>
+      <Form onSubmit={(e) => refreshReports(e)}>
         <Row
           style={{
             justifyContent: "center",
@@ -117,7 +61,12 @@ export default function Reports() {
                 type="text"
                 placeholder="search reports"
                 ref={searchRef}
-                onChange={findReports}
+                onChange={() =>
+                  findReports(
+                    searchRef.current.value.toUpperCase(),
+                    selectRef.current.value
+                  )
+                }
               />
               <Form.Label
                 style={{
@@ -174,7 +123,8 @@ export default function Reports() {
       {data.length > 0 && (
         <TableView
           reports={data}
-          updateData={(updatedReportsList) => setData(updatedReportsList)}
+          deleteReport={deleteReport}
+          isDeleting={isDeleting}
         />
       )}
     </Container>
