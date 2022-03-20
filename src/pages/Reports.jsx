@@ -6,8 +6,14 @@ import TableView from "@Components/reports-list/TableView";
 import useReport from "@Hooks/useReport";
 
 export default function Reports() {
-  const { data, loading, refreshReports, findReports, deleteReport } =
-    useReport();
+  const {
+    data,
+    loading,
+    refreshReports,
+    findReports,
+    deleteReport,
+    isDeleting,
+  } = useReport();
 
   const searchRef = useRef();
   const selectRef = useRef();
@@ -115,7 +121,11 @@ export default function Reports() {
         </Row>
       )}
       {data.length > 0 && (
-        <TableView reports={data} deleteReport={deleteReport} />
+        <TableView
+          reports={data}
+          deleteReport={deleteReport}
+          isDeleting={isDeleting}
+        />
       )}
     </Container>
   );

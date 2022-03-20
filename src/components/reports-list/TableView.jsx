@@ -8,11 +8,11 @@ import { Container, Row, Col, Table, Button } from "react-bootstrap";
 import GeneratePDF from "@Utils/pdf";
 
 function TableView(props) {
-  const { reports, deleteReport } = props;
-  const [loading, setLoading] = useState(false);
+  const { reports, deleteReport, isDeleting } = props;
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const downloadReport = async (id, flag) => {
-    setLoading(true);
+    setIsDownloading(true);
     const toastId = toast.loading("generating report...");
 
     const reportData = reports.find((report) => report.id === id).data();
@@ -24,7 +24,7 @@ function TableView(props) {
       toast.error(err.message, { id: toastId });
     }
 
-    setLoading(false);
+    setIsDownloading(false);
   };
 
   return (
@@ -79,7 +79,7 @@ function TableView(props) {
                       <Button
                         variant="danger"
                         onClick={() => deleteReport(doc.id)}
-                        disabled={loading}
+                        disabled={isDownloading || isDeleting}
                       >
                         Delete
                       </Button>
@@ -88,7 +88,7 @@ function TableView(props) {
                       <Button
                         variant="success"
                         onClick={() => downloadReport(doc.id, false)}
-                        disabled={loading}
+                        disabled={isDownloading || isDeleting}
                       >
                         Download
                       </Button>
@@ -97,7 +97,7 @@ function TableView(props) {
                       <Button
                         variant="success"
                         onClick={() => downloadReport(doc.id, true)}
-                        disabled={loading}
+                        disabled={isDownloading || isDeleting}
                       >
                         Download
                       </Button>
@@ -116,6 +116,7 @@ function TableView(props) {
 TableView.propTypes = {
   reports: PropTypes.arrayOf(Object).isRequired,
   deleteReport: PropTypes.func.isRequired,
+  isDeleting: PropTypes.bool.isRequired,
 };
 
 export default TableView;
